@@ -1,28 +1,27 @@
-<img src="https://atkin.engineering/images/AtkinEngineering_logo_final_webRGB.png" style="width:200px">
+<img src="https://atkin.engineering/images/AtkinEngineering_logo_final_webRGB.png" style="width:200px">  
 
 # interfaceNode
 ## _Datasheet_
 
 The Atkin Engineering _**interfaceNode**_ is a Wireless RS-485 bridge that provides a bridging connections between RS-485, WiFi and USB for various control devices.
 
-_**front**_ |_**rear**_ 
-:---:|:---:
-![](https://atkin.engineering/images/interfaceNode-front.png)|![](https://atkin.engineering/images/interfaceNode-rear.png)
+|             _**front**_             |             _**rear**_             |
+| :---------------------------------: | :--------------------------------: |
+| ![](https://atkin.engineering/images/interfaceNode-front.png) | ![](https://atkin.engineering/images/interfaceNode-rear.png) |
 
 ## Block Diagram
 ```mermaid
 flowchart LR
-    USB{{USB}} <--> USB_CTRL[USB CTRL]
-    LED3((LED 3)) --- USB_CTRL[USB CTRL]
-    USB_CTRL[USB CTRL] <--> PROTECTION1[/PROTECTION/]
-    PROTECTION1[/PROTECTION/] <--> PROCESSOR[PROCESSOR]
-    SWITCH[SWITCH] ----> PROCESSOR[PROCESSOR]
-    PROCESSOR[PROCESSOR] <---> WIFI{{WIFI}}
-    PROCESSOR[PROCESSOR] <--> PROTECTION2[/PROTECTION/]
+    USB{{USB}} <--> PROTECTION1[/PROTECTION/]
+    PROTECTION1[/PROTECTION/] <--> PROCESSOR(PROCESSOR)
+    SWITCH[SWITCH] ---> PROCESSOR(PROCESSOR)
+    LED3((LED 3)) ---- PROCESSOR(PROCESSOR)
+    PROCESSOR(PROCESSOR) <---> WIFI{{WIFI}}
+    PROCESSOR(PROCESSOR) <--> PROTECTION2[/PROTECTION/]
     PROTECTION2[/PROTECTION/] <--> RS485{{RS485}}
-    PROCESSOR[PROCESSOR] ---- LED1((LED 1))
-    PROCESSOR[PROCESSOR] ---- LED2((LED 2))
+    PROCESSOR(PROCESSOR) ---- LED1((LED's 1 & 2))
 ```
+
 <div class="page"/>
 
 ## Specifications
@@ -36,29 +35,41 @@ Due to continuous improvements and innovations, specifications may change withou
 - Supply: 12/24 VDC (absolute range 5 - 42 VDC) from RJ45 port
 - Supply: 20-250ma @ 12 VDC [^current]   
 
-### Power protection
+## Protections
+### Power
 - AEC-Q100 Qualified
 - Reverse Input Protection to –40 VDC
 
-### RS485 data protection
+### RS485 Data
 - IEC 61000-4-2 electrostatic discharge (ESD), Level 4 - 8k V / 15 kV (Contact / Air)
 - IEC 61000-4-4 electrical fast transients (EFT), Level 4 - 2 kV
 - IEC 61000-4-5 surge immunity, Level 2 - 4 kV
 - ±70 VDC bus fault
 
-###  USB protection
+###  USB
 - Isolation voltage 2.5kV
-- Transient / Surge 4kV
+- Transient / Surge 5kV
+
+## Services
+
+### RS485
+- Full / Half duplex
+- Termination `None` / `120ohm`
+- Protocol aware
 
 ### WiFi (Access Point / Station)
 - 802.11b/g/n - compliant
 - Bit rate: 802.11n up to 150 Mbps
 - Center frequency range of operating channel: 2412 ~ 2484 MHz
 
+<div class="page"/>
+
+### USB
+- USB serial data
+  - CDC / RNDIS
+
 ### Bluetooth [^bluetooth]
 - Bluetooth LE: Bluetooth 5, Bluetooth mesh
-
-<div class="page"/>
 
 ## Connections
 _**Front**_
@@ -67,7 +78,7 @@ _**Front**_
 - 1x Service switch
 
 _**Rear**_
-- 2x RS-485 (parallel RJ12 6P6 ports) [^rs485power]<br>Termination: `None` / `120ohm`
+- 2x RS-485 (parallel RJ12 6P6 ports) [^rs485power]
 - 2x RGB status LED’s
 
 ## Environment
@@ -76,7 +87,7 @@ _**Rear**_
 - Humidity 0 to 90% non-condensing
 
 ## Compliance
-- RF certification: SRRC, CE, FCC
+- RF certification: CE, FCC, IC, SRRC, TELEC & BQB
 - Green certification: REACH/RoHS
 
 ## Supplied accessories
